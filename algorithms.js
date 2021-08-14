@@ -1,6 +1,6 @@
 'strict'
 /////////////////////////////////////////////////////////////////////
-//KATA1
+//KATA1 checkstatus1
 function spinWords(string){
   let str = ' ';
     let subString = string.split(' ');
