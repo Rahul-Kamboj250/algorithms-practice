@@ -31,7 +31,7 @@ return arr.filter(el => typeof el === 'number' )
 }
 console.log(intFilter([1,2,'a','b']))
 /////////////////////////////////////////////////////////////////////
-//kata3 
+//kata3 check status 2
 // Implement a method that accepts 3 integer values a, b, c. 
 //The method should return true if a triangle can be built with the sides of given length 
 // and false in any other case.
