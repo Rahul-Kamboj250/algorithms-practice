@@ -1,57 +1,49 @@
-'strict'
+"strict";
 /////////////////////////////////////////////////////////////////////
 //KATA1 checkstatus1
-function spinWords(string){
-  let str = ' ';
-    let subString = string.split(' ');
-  
-   for(let i =0;i < subString.length; i++){
-     if(subString[i].length >=5){
-      str += ' ' +subString[i].split('').reverse().join('')
+function spinWords(string) {
+  let str = " ";
+  let subString = string.split(" ");
 
-     }else{
-       str += ' ' + subString[i]
-     }
-   }
-     return str
+  for (let i = 0; i < subString.length; i++) {
+    if (subString[i].length >= 5) {
+      str += " " + subString[i].split("").reverse().join("");
+    } else {
+      str += " " + subString[i];
+    }
   }
- console.log(spinWords('welcome'));
- /////////////////////////////////////////////////////////////////////
+  return str;
+}
+console.log(spinWords("welcome"));
+/////////////////////////////////////////////////////////////////////
 //  kata 2
 //  In this kata you will create a function that takes
-//  a list of non-negative integers and strings 
+//  a list of non-negative integers and strings
 //  and returns a new list with the strings filtered out.
 // filter_list([1,2,'a','b']) == [1,2]
 // filter_list([1,'a','b',0,15]) == [1,0,15]
 // filter_list([1,2,'aasf','1','123',123]) == [1,2,123]
-const intFilter = function(arr){
-return arr.filter(el => typeof el === 'number' )
-
-
-}
-console.log(intFilter([1,2,'a','b']))
+const intFilter = function (arr) {
+  return arr.filter((el) => typeof el === "number");
+};
+console.log(intFilter([1, 2, "a", "b"]));
 /////////////////////////////////////////////////////////////////////
 //kata3 check status 2
-// Implement a method that accepts 3 integer values a, b, c. 
-//The method should return true if a triangle can be built with the sides of given length 
+// Implement a method that accepts 3 integer values a, b, c.
+//The method should return true if a triangle can be built with the sides of given length
 // and false in any other case.
 
-function isTriangle(a,b,c)
-{
-  if(a<=0 || b<=0|| c<=0)
-   return false;
-  
- if(a+b>c && b+c >a && c+a >b)
-return true;
-  
-else 
-return false;
+function isTriangle(a, b, c) {
+  if (a <= 0 || b <= 0 || c <= 0) return false;
+
+  if (a + b > c && b + c > a && c + a > b) return true;
+  else return false;
 }
-console.log(isTriangle(1,2,2))
+console.log(isTriangle(1, 2, 2));
 /////////////////////////////////////////////////////////////////////
 //kata4
 // Write a method that takes an array of consecutive (increasing) letters as input and that returns the missing letter in the array.
-// You will always get an valid array. 
+// You will always get an valid array.
 // And it will be always exactly one letter be missing.
 //  The length of the array will always be at least 2.
 // The array will always contain letters in only one case.
@@ -64,8 +56,6 @@ console.log(isTriangle(1,2,2))
 
 // })
 // }
-
-
 
 /////////////////////////////////////////////////////////////////////
 //kata5
@@ -84,8 +74,6 @@ console.log(isTriangle(1,2,2))
 // "(}"       =>  Fals
 // "[({})](]" =>  False
 
-
-
 // const validBraces = function(braces){
 //   const openBraces = ['(','{','['];
 // const closeBraces = [')','}', ']'];
@@ -102,51 +90,43 @@ console.log(isTriangle(1,2,2))
 //   };
 // console.log(validBraces("(" ))
 
-// soluton2
+// soluton2(not wrking)
 // very long runtime due to while loop
 // const validBraces = (braces) =>{
 //   //braces.length % 2 === 0 even number of braces
 //   if(braces.length % 2 !== 0) return false;
 
 //   while(braces.includes('()') || braces.includes('{}') || braces.includes('[]'))
-//   {  
+//   {
 //     braces.replace('()', '').replace('{}', '').replace('[]', '')
 //   }  return braces === '';
 // }
 
-
-// right solution need to figure out 
+// right solution 
 
 let validBraces = (s) => {
-  let objO  = {'(': 0, '[': 1, '{': 2};
-  let objC  = {')': 0, ']': 1, '}': 2};
+  let objO = { "(": 0, "[": 1, "{": 2 };
+  let objC = { ")": 0, "]": 1, "}": 2 };
   let arr = [];
 
-  for (let i=0; i<s.length; i++) {
-    
-      if (objO.hasOwnProperty(s[i])) {
-       
-          if (arr.length === 0 || arr[arr.length-1].idx !== objO[s[i]])
-             { arr.push({idx: objO[s[i]], count: 1})
-          
+  for (let i = 0; i < s.length; i++) {
+    if (objO.hasOwnProperty(s[i])) {
+      if (arr.length === 0 || arr[arr.length - 1].idx !== objO[s[i]]) {
+        arr.push({ idx: objO[s[i]], count: 1 });
+      } else arr[arr.length - 1].count++;
+    } else if (objC.hasOwnProperty(s[i])) {
+      if (arr.length === 0 || arr[arr.length - 1].idx !== objC[s[i]]) {
+        return false;
+      } else {
+        arr[arr.length - 1].count--;
+        if (arr[arr.length - 1].count === 0) arr.pop();
       }
-          else
-              arr[arr.length-1].count++;
-      }
-      else if (objC.hasOwnProperty(s[i])) {
-          if (arr.length === 0 || arr[arr.length-1].idx !== objC[s[i]])
-         { return false;}
-          else {
-              arr[arr.length-1].count--;
-              if (arr[arr.length-1].count===0)
-                  arr.pop();
-          }
-      }
+    }
   }
-}
+};
 // Complete the method/function so that it converts dash/underscore delimited words into camel casing.
 //  The first word within the output should be capitalized
-  // only if the original word was capitalized (known as Upper Camel Case, also often referred to as Pascal case).
+// only if the original word was capitalized (known as Upper Camel Case, also often referred to as Pascal case).
 
 // Example
 // "the-stealth-warrior" gets converted to "theStealthWarrior"
@@ -158,14 +138,13 @@ let validBraces = (s) => {
 //   let string = ' ';
 //   //when we use more than one separator we use regex as follow.
 //   const strToArr = str.split(/[- _]+/);
-//   const capStr =  strToArr.map((el) => 
+//   const capStr =  strToArr.map((el) =>
 
 //   el.charAt(0).toUpperCase() + el.slice(1)
 // );
-  
+
 //   capStr.shift();
-    
-  
+
 //   string = `${strToArr[0]}${capStr.join('')}`
 //  console.log(string)
 //  return string;
@@ -181,8 +160,13 @@ let validBraces = (s) => {
 //    });
 // }
 // solution 3
-function toCamelCase(str){
-  return str.split(/-|_/g).map((w, i) => (i > 0 ? w.charAt(0).toUpperCase() : w.charAt(0)) + w.slice(1)).join('');
+function toCamelCase(str) {
+  return str
+    .split(/-|_/g)
+    .map(
+      (w, i) => (i > 0 ? w.charAt(0).toUpperCase() : w.charAt(0)) + w.slice(1)
+    )
+    .join("");
 }
 //////////////////////////////////////////////////////////////////////////////////
 // kata 6
@@ -193,26 +177,23 @@ function toCamelCase(str){
 //  (in hexadecimal notation), or 0 to 255 in decimal notation.
 //  This represents the least (0) to the most (255) intensity of each of the color components.
 
-// 
- 
-const hexaColorGen = ()=>{
-    // storing all letter and digit combinations
-    // for html color code
-    let letters = "0123456789ABCDEF";
-  
-    // html color code starts with #
-    let color = '#';
-  
-    // generating 6 times as HTML color code consist
-    // of 6 letter or digits
-    for (let i = 0; i < 6; i++)
-       color += letters[Math.floor(Math.random() * 16)];
+//
 
-return color;
+const hexaColorGen = () => {
+  // storing all letter and digit combinations
+  // for html color code
+  let letters = "0123456789ABCDEF";
+
+  // html color code starts with #
+  let color = "#";
+
+  // generating 6 times as HTML color code consist
+  // of 6 letter or digits
+  for (let i = 0; i < 6; i++) color += letters[Math.floor(Math.random() * 16)];
+
+  return color;
 };
-console.log(
-hexaColorGen());
-
+console.log(hexaColorGen());
 
 /*// The toString () function for JavaScript numbers takes a radix parameter that defines the base of the numeral system.
 //  In other words, num.toString (2) converts the number to a binary number string,
@@ -235,8 +216,8 @@ console.log(
   // SOLUTON3
   const generateColor = () => '#' + Math.random().toString(16).substr(-6);
   generateColor();*/
-  /////////////////////////////////////////////////////////////////////
-  // KATA 7
+/////////////////////////////////////////////////////////////////////
+// KATA 7
 //   The goal of Pig is to reach a total score of, say, 100, accumulated over multiple rounds by rolling a six-sided die.
 //  The players take turns in playing and, in each round, a player rolls the die as many times they want summing up the results.
 //  But, if they roll a 1, the score for that round is zero. The trick to the game is to know when to stop.
@@ -244,13 +225,12 @@ console.log(
 // Example: Say a player rolls a 5 and then a 6. If they stop, 11 points is the score for that round and is added to their total score.
 //  If the player continues and rolls a 3 and then a 1, the score for the round is zero and nothing is added to their total score.
 
-
-// The strategy that yields the maximum average score per round is to roll the die until 20 is reached (i.e., the score is 20 or above) 
-// and then stop. However, if your opponent is ahead of you, you might want to play more aggressively, 
-// and, if your opponent is way behind, you might choose to play more safely. 
+// The strategy that yields the maximum average score per round is to roll the die until 20 is reached (i.e., the score is 20 or above)
+// and then stop. However, if your opponent is ahead of you, you might want to play more aggressively,
+// and, if your opponent is way behind, you might choose to play more safely.
 // This adds another level of complexity, but we won't pursue that here. Let's just concentrate on the average score when playing "stop at n".
 
-// The expected (or average) score per round when you play "stop at 20" is a little over 8. 
+// The expected (or average) score per round when you play "stop at 20" is a little over 8.
 // This means that 20 is reached in approximately 4 out of 10 rounds on average.
 
 // The goal of this kata is to write a function stop_at(m, n) which returns the expected score when rolling an m-sided die until n is reached.
@@ -265,13 +245,12 @@ console.log(
 // Output constraints:
 
 // The result has to be within 1e-3 from the correct value
-// Note that a Monte-Carlo simulation as shown in the Numberphile video converges very slowly 
+// Note that a Monte-Carlo simulation as shown in the Numberphile video converges very slowly
 // and is likely to either not provide a result that is sufficiently precise or time out.
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 // KATA8
-// Move the first letter of each word to the end of it, 
+// Move the first letter of each word to the end of it,
 // then add "ay" to the end of the word. Leave punctuation marks untouched.
 //SOLUTION1
 /*
@@ -304,8 +283,49 @@ console.log(pigIt('Pig latin is cool'));
 console.log(pigIt('hello world !'));
 */
 // solution3
-function pigIt(str){
-  return str.replace(/(\w)(\w*)(\s|$)/g, "\$2\$1ay\$3")
+function pigIt(str) {
+  return str.replace(/(\w)(\w*)(\s|$)/g, "$2$1ay$3");
 }
-console.log(pigIt('Pig latin is cool'));
-console.log(pigIt('hello world !'));
+console.log(pigIt("Pig latin is cool"));
+console.log(pigIt("hello world !"));
+
+// kata9
+/*
+ Complete the solution so that it reverses all of the words within the string passed in.
+
+Example:
+
+"The greatest victory is that which requires no battle" --> "battle no requires which that is victory greatest The"*/
+
+// solution
+
+const reverseStr = function (str) {
+  return str.split(" ").reverse().join(" ");
+};
+reverseStr("The greatest victory is that which requires no battle");
+
+// kata9
+/*
+Given a positive integer n, calculate the following sum:
+
+n + n/2 + n/4 + n/8 + ...
+All elements of the sum are the results of integer division.
+
+Example
+25  =>  25 + 12 + 6 + 3 + 1 = 47
+*/
+
+// solution
+
+const havingSum = function (n) {
+  let sum = 0;
+  while(n > 0){
+    sum += n;
+    n = Math.floor(n / 2);
+   
+  }
+  // console.log(sum);
+  return sum;
+
+};
+havingSum(25);
